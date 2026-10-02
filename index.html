@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AYRA — Artesanía, Fragancia y Diseño</title>
+  <meta name="description" content="AYRA — Piezas artesanales únicas hechas a mano en Paraguay. Porcelana personalizada, aromas y lámparas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --olive:       #6b6e2a;
+      --olive-dark:  #545126;
+      --olive-light: #9a9d48;
+      --cream:       #f4efe4;
+      --cream-mid:   #ece6d9;
+      --cream-dark:  #d5cfc3;
+      --brown:       #362a1b;
+      --brown-mid:   #7a6a58;
+      --gold:        #b89a45;
+      --white:       #fdfcf9;
+      --text:        #2a2218;
+      --text-mid:    #6a5f54;
+      --text-light:  #a09488;
+      --serif:       'Cormorant Garamond', Georgia, serif;
+      --sans:        'Jost', system-ui, sans-serif;
+      --max:         1240px;
+      --gap:         clamp(1.25rem, 3vw, 2rem);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: #130f08; }
+    img { display: block; max-width: 100%; }
+
+    body {
+      font-family: var(--sans);
+      background: #130f08;
+      color: var(--text);
+      font-weight: 300;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── ANNOUNCEMENT BAR ── */
+    .bar {
+      background: var(--olive-dark);
+      color: #fff;
+      text-align: center;
+      padding: 0.55rem var(--gap);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .bar a {
+      color: #fff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: opacity .2s;
+    }
+    .bar a:hover { opacity: .75; }
+
+    /* ── NAV ── */
+    #navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--cream-dark);
+      transition: box-shadow .3s;
+    }
+    #navbar.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,.07); }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--gap);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      height: 64px;
+    }
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-right { justify-content: flex-end; }
+    .nav-left a, .nav-right a {
+      font-size: 0.68rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 400;
+      transition: color .2s;
+    }
+    .nav-left a:hover, .nav-right a:hover { color: var(--olive); }
+    .nav-logo {
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: .35em;
+      color: var(--brown);
+      text-decoration: none;
+    }
+    .nav-ig svg { display: block; }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text);
+      transition: all .3s;
+    }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: var(--white);
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--brown);
+      text-decoration: none;
+      letter-spacing: .05em;
+    }
+    .mobile-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: var(--text-mid);
+      line-height: 1;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: calc(100vh - 97px);
+      height: calc(100svh - 97px);
+      min-height: 520px;
+      overflow: hidden;
+    }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.04) 0%, rgba(0,0,0,.42) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      padding: var(--gap);
+    }
+    .hero-eyebrow {
+      font-size: .62rem;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      opacity: .85;
+      margin-bottom: 1.25rem;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(4.5rem, 12vw, 10rem);
+      font-weight: 300;
+      letter-spacing: .45em;
+      line-height: 1;
+      margin-bottom: 1.25rem;
+    }
+    .hero-sub {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      font-weight: 300;
+      opacity: .88;
+      margin-bottom: 2.75rem;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-block;
+      padding: .75rem 2.5rem;
+      font-family: var(--sans);
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-weight: 400;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all .25s;
+    }
+    .btn-ghost {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.55);
+    }
+    .btn-ghost:hover { background: #fff; color: var(--brown); }
+    .btn-olive {
+      background: var(--olive-dark);
+      color: #fff;
+    }
+    .btn-olive:hover { background: var(--olive); }
+    .btn-outline {
+      background: transparent;
+      color: var(--olive-dark);
+      border: 1px solid var(--olive-dark);
+    }
+    .btn-outline:hover { background: var(--olive-dark); color: #fff; }
+    .btn-gold {
+      background: var(--gold);
+      color: #fff;
+    }
+    .btn-gold:hover { background: #a08030; }
+
+    /* ── SECTION SCAFFOLDING ── */
+    section { padding: 6rem var(--gap); }
+    .inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-size: .6rem;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: .6rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 300;
+      color: var(--brown);
+      line-height: 1.12;
+      margin-bottom: 1.25rem;
+    }
+    .section-lead {
+      font-size: .9rem;
+      color: var(--text-mid);
+      max-width: 540px;
+      line-height: 1.85;
+    }
+
+    /* ── SHOP OVERLAY ── */
+    .shop-overlay {
+      display: none;
+      position: fixed;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: var(--cream);
+      z-index: 300;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .shop-overlay.open { display: block; }
+    .shop-overlay-bar {
+      position: sticky;
+      top: 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--cream-dark);
+      z-index: 10;
+      padding: 0 var(--gap);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .shop-overlay-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: .25em;
+      color: var(--brown);
+    }
+    .shop-overlay-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-mid);
+      border-radius: 50%;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .shop-overlay-close:hover { background: var(--cream-mid); }
+    .shop-overlay-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 3rem var(--gap) 5rem;
+    }
+    .nav-shop-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .68rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-family: var(--sans);
+      font-weight: 400;
+      transition: color .2s;
+      padding: 0;
+    }
+    .nav-shop-btn:hover { color: var(--olive); }
+    .shop-head { text-align: center; margin-bottom: 3rem; }
+    .shop-head .section-lead { margin: 0 auto; }
+
+    .filter-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+    .filters {
+      display: flex;
+      background: var(--cream-mid);
+      padding: .25rem;
+      gap: .2rem;
+    }
+    .f-btn {
+      padding: .5rem 1.75rem;
+      font-family: var(--sans);
+      font-size: .63rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-weight: 400;
+      background: none;
+      border: none;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .f-btn:hover { color: var(--text); }
+    .f-btn.active {
+      background: var(--white);
+      color: var(--olive-dark);
+      box-shadow: 0 1px 4px rgba(0,0,0,.09);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .card {
+      background: var(--white);
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(0,0,0,.09);
+    }
+    .card-img {
+      position: relative;
+      padding-bottom: 125%;
+      height: 0;
+      overflow: hidden;
+      background: var(--cream-mid);
+    }
+    .card-img img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .55s ease;
+    }
+    .card:hover .card-img img { transform: scale(1.05); }
+    .card-badge {
+      position: absolute;
+      top: .9rem;
+      left: .9rem;
+      background: var(--olive-dark);
+      color: #fff;
+      font-size: .52rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: .22rem .65rem;
+    }
+    .card-body { padding: 1.25rem; }
+    .card-name {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: .3rem;
+    }
+    .card-desc {
+      font-size: .78rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: .8rem;
+    }
+    .card-price {
+      font-size: .85rem;
+      color: var(--olive-dark);
+      font-weight: 500;
+      letter-spacing: .04em;
+    }
+    .card-note {
+      font-size: .68rem;
+      color: var(--text-light);
+      margin-top: .25rem;
+      line-height: 1.6;
+    }
+
+    /* custom porcelain banner card */
+    .card-catalog {
+      background: var(--olive-dark);
+      display: flex;
+      flex-direction: column;
+    }
+    .card-catalog .card-img {
+      background: var(--olive);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-catalog .catalog-text-img {
+      text-align: center;
+      padding: 2rem;
+    }
+    .card-catalog .catalog-text-img p {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      color: rgba(245,240,230,.9);
+      line-height: 1.3;
+    }
+    .card-catalog .catalog-text-img span {
+      font-style: italic;
+      display: block;
+    }
+    .card-catalog .card-body { flex: 1; }
+    .card-catalog .card-name { color: rgba(245,240,230,.95); }
+    .card-catalog .card-desc { color: rgba(245,240,230,.65); }
+    .card-catalog .card-price { color: var(--gold); }
+    .card-catalog .card-note { color: rgba(245,240,230,.45); }
+
+    /* ── PRICE TABLE (porcelain catalog) ── */
+    .price-table {
+      width: 100%;
+      font-size: .72rem;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      color: var(--text-mid);
+    }
+    .price-table th {
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-size: .6rem;
+      padding: .5rem .75rem;
+      background: var(--cream-mid);
+      color: var(--text);
+      text-align: left;
+    }
+    .price-table td {
+      padding: .5rem .75rem;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+    .price-table tr:last-child td { border-bottom: none; }
+
+    /* ── HISTORIA ── */
+    #historia { background: var(--white); }
+    .historia-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .historia-imgs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+      align-items: start;
+    }
+    .img-main, .img-secondary {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .historia-text { padding-left: .5rem; }
+    .historia-quote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+      font-weight: 300;
+      color: var(--brown);
+      line-height: 1.55;
+      border-left: 2px solid var(--olive-light);
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .historia-body {
+      font-size: .88rem;
+      color: var(--text-mid);
+      line-height: 1.95;
+      margin-bottom: 2rem;
+    }
+    .historia-names {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--olive-dark);
+      letter-spacing: .05em;
+      margin-bottom: 2rem;
+    }
+
+    /* ── VALORES ── */
+    .valores {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 5rem;
+      padding-top: 4rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .valor-item { text-align: center; }
+    .valor-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--cream-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: var(--olive);
+      font-size: 1rem;
+    }
+    .valor-item h4 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: .4rem;
+    }
+    .valor-item p {
+      font-size: .78rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+    }
+
+    /* ── DONDE ENCONTRARNOS ── */
+    #donde { background: var(--cream); }
+    .donde-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .donde-card {
+      background: var(--white);
+      padding: 2rem 1.75rem;
+      border-bottom: 2px solid var(--olive-dark);
+    }
+    .donde-card h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: .5rem;
+    }
+    .donde-card p {
+      font-size: .8rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+    }
+    .stores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+    .store-card {
+      background: var(--white);
+      border: 1px solid var(--cream-dark);
+      padding: 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: .75rem;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .store-card:hover { box-shadow: 0 6px 20px rgba(54,42,27,.08); transform: translateY(-2px); }
+    .store-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--cream-mid);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--olive-dark);
+      flex-shrink: 0;
+    }
+    .store-logo-box {
+      width: 100%;
+      height: 72px;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      gap: .2rem;
+    }
+    .store-name {
+      font-family: var(--serif);
+      font-size: .95rem;
+      font-weight: 400;
+      color: var(--brown);
+      line-height: 1.35;
+    }
+    /* ── PORCELANA GALLERY ── */
+    .porcelana-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 240px 240px;
+      gap: .75rem;
+      max-width: 620px;
+      margin: 0 auto 4rem;
+    }
+    .porcelana-gallery-img {
+      position: relative;
+      overflow: hidden;
+      background: var(--cream-mid);
+    }
+    .porcelana-gallery-img:first-child {
+      grid-row: 1 / 3;
+    }
+    .porcelana-gallery-img img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+    }
+    .porcelana-gallery-img:hover img { transform: scale(1.04); }
+
+    /* ── CONTACTO ── */
+    #contacto { background: var(--brown); color: var(--cream); }
+    #contacto .eyebrow { color: var(--gold); }
+    #contacto .section-title { color: var(--cream); }
+    .contacto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      margin-top: 3rem;
+    }
+    .contacto-lead {
+      font-size: .88rem;
+      color: rgba(245,240,230,.65);
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 1.1rem; }
+    .c-link {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      color: var(--cream);
+      text-decoration: none;
+      font-size: .82rem;
+      transition: opacity .2s;
+    }
+    .c-link:hover { opacity: .65; }
+    .c-icon {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(245,240,230,.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: .85rem;
+    }
+    .c-icon svg { display: block; }
+
+    /* form */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .field { display: flex; flex-direction: column; gap: .3rem; }
+    .field label {
+      font-size: .58rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(245,240,230,.5);
+    }
+    .field input, .field textarea, .field select {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(245,240,230,.18);
+      padding: .75rem 1rem;
+      font-family: var(--sans);
+      font-size: .83rem;
+      color: var(--cream);
+      outline: none;
+      resize: none;
+      transition: border-color .2s;
+      -webkit-appearance: none;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      border-color: rgba(245,240,230,.45);
+    }
+    .field input::placeholder, .field textarea::placeholder {
+      color: rgba(245,240,230,.28);
+    }
+    .field select option { background: var(--brown); }
+    .form-note {
+      font-size: .7rem;
+      color: rgba(245,240,230,.35);
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #130f08;
+      color: rgba(245,240,230,.45);
+      padding: 3rem var(--gap);
+    }
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 2rem;
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 300;
+      letter-spacing: .4em;
+      color: rgba(245,240,230,.75);
+      text-align: center;
+      justify-self: center;
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-links a {
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(245,240,230,.45);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: rgba(245,240,230,.8); }
+    .footer-copy {
+      font-size: .65rem;
+      text-align: right;
+      justify-self: end;
+      letter-spacing: .05em;
+    }
+    .footer-copy a {
+      color: rgba(245,240,230,.45);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-copy a:hover { color: rgba(245,240,230,.8); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .historia-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .valores { grid-template-columns: 1fr 1fr; }
+      .contacto-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-inner { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+      .footer-links { justify-content: center; }
+      .footer-copy { text-align: center; justify-self: center; }
+      .tier-grid { grid-template-columns: 1fr 1fr; }
+      .porcelana-conditions { flex-direction: column; }
+      .condition-item { border-right: none; border-bottom: 1px solid var(--cream-dark); }
+      .condition-item:last-child { border-bottom: none; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-left { display: none; }
+      .nav-right a:not(.nav-ig) { display: none; }
+      .hamburger { display: flex; }
+      .nav-inner { grid-template-columns: auto 1fr auto; }
+      .nav-logo { text-align: left; font-size: 1.6rem; }
+      .hero { height: 100vh; min-height: 500px; }
+      section { padding: 3.5rem var(--gap); }
+
+      /* Shop overlay — compact grid */
+      .shop-head { margin-bottom: 1.5rem; }
+      .shop-head .section-lead { display: none; }
+      .filter-wrap { margin-bottom: 1.5rem; }
+      .filters { display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch;
+                 flex-wrap: nowrap; gap: .3rem; padding-bottom: 2px; }
+      .f-btn { padding: .4rem .9rem; white-space: nowrap; flex-shrink: 0; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+      .card-img { padding-bottom: 100%; }
+      .card-body { padding: .65rem .7rem; }
+      .card-name { font-size: 1rem; margin-bottom: .15rem; }
+      .card-desc { display: none; }
+      .card-badge { display: none; }
+      .card-price { font-size: .85rem; }
+
+      /* Porcelana */
+      .porcelana-head { margin-bottom: 2rem; }
+      .porcelana-gallery { grid-template-rows: 200px 200px; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .cta-buttons .btn { width: 100%; max-width: 320px; text-align: center; }
+      .catalog-full-head h3 { font-size: 1.25rem; }
+
+      /* Historia */
+      .historia-imgs { grid-template-columns: 1fr; }
+
+      /* Donde */
+      .stores-grid { grid-template-columns: repeat(2, 1fr); }
+
+      /* Forms */
+      .form-row { grid-template-columns: 1fr; }
+      .valores { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 2.5rem var(--gap); }
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: .5rem; }
+      .historia-grid { gap: 2rem; }
+      .historia-imgs { grid-template-columns: 1fr; }
+      .contacto-grid { gap: 2rem; }
+      .valores { gap: 1.5rem; }
+      .porcelana-conditions { margin-bottom: 2rem; }
+      .img-secondary { display: none; }
+      .historia-imgs { padding-right: 0; padding-bottom: 0; }
+      .porcelana-gallery { grid-template-rows: 160px 160px; max-width: 100%; }
+    }
+
+    /* ── PORCELANA PERSONALIZADA ── */
+    #porcelana { background: var(--white); border-bottom: 1px solid var(--cream-mid); }
+    .porcelana-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 4rem;
+    }
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+    .tier-card {
+      border: 1px solid var(--cream-dark);
+      background: var(--white);
+      transition: box-shadow .25s, transform .25s;
+    }
+    .tier-card:hover { box-shadow: 0 8px 32px rgba(54,42,27,.1); transform: translateY(-3px); }
+    .tier-card--featured { border-color: var(--olive); }
+    .tier-img {
+      position: relative;
+      width: 100%;
+      padding-bottom: 75%;
+      height: 0;
+      overflow: hidden;
+    }
+    .tier-img img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .tier-img--placeholder {
+      background: var(--cream-mid);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+    }
+    .tier-num {
+      font-family: var(--serif);
+      font-size: 4.5rem;
+      font-weight: 300;
+      color: var(--cream-dark);
+      line-height: 1;
+    }
+    .tier-photo-note {
+      font-family: var(--sans);
+      font-size: .58rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .tier-body { padding: 1.5rem 1.4rem; }
+    .tier-label {
+      font-family: var(--sans);
+      font-size: .58rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: .35rem;
+    }
+    .tier-name {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--brown);
+      line-height: 1.3;
+      margin-bottom: .75rem;
+    }
+    .tier-desc {
+      font-family: var(--sans);
+      font-size: .77rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .tier-price {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--olive-dark);
+    }
+    .catalog-full { margin-bottom: 4rem; }
+    .catalog-toggle {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .catalog-toggle-icon {
+      width: 28px; height: 28px;
+      background: var(--olive-dark);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background .2s;
+    }
+    .catalog-toggle:hover .catalog-toggle-icon { background: var(--olive); }
+    .catalog-toggle-icon svg { transition: transform .3s; }
+    .catalog-toggle[aria-expanded="true"] .catalog-toggle-icon svg { transform: rotate(180deg); }
+    .catalog-toggle-label {
+      font-family: var(--sans);
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--olive-dark);
+    }
+    .catalog-table-collapsible {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .4s ease;
+    }
+    .catalog-table-collapsible.is-open { max-height: 9999px; }
+    .catalog-full-head { margin-bottom: 2rem; }
+    .catalog-full-head h3 {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: .4rem;
+    }
+    .catalog-full-head p {
+      font-family: var(--sans);
+      font-size: .78rem;
+      color: var(--text-mid);
+      line-height: 1.65;
+    }
+    .catalog-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; width: 100%; }
+    .price-table--full {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--sans);
+      font-size: .77rem;
+      min-width: 580px;
+    }
+    .price-table--full th {
+      background: var(--brown);
+      color: var(--cream);
+      font-weight: 500;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      font-size: .62rem;
+      padding: .8rem 1rem;
+      text-align: left;
+    }
+    .price-table--full td {
+      padding: .6rem 1rem;
+      border-bottom: 1px solid var(--cream-mid);
+      color: var(--text);
+    }
+    .price-table--full tr:not(.cat-header):last-child td { border-bottom: none; }
+    .price-table--full tr.cat-header td {
+      background: var(--cream-mid);
+      font-weight: 600;
+      font-size: .62rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--olive-dark);
+      padding: .55rem 1rem;
+      border-bottom: none;
+    }
+    .price-table--full tbody tr:not(.cat-header):hover td { background: var(--cream); }
+    .porcelana-conditions {
+      display: flex;
+      gap: 0;
+      background: var(--cream-mid);
+      margin-bottom: 3.5rem;
+    }
+    .condition-item {
+      display: flex;
+      gap: .9rem;
+      align-items: flex-start;
+      flex: 1;
+      padding: 1.75rem 2rem;
+      border-right: 1px solid var(--cream-dark);
+    }
+    .condition-item:last-child { border-right: none; }
+    .cond-icon {
+      font-size: 1.1rem;
+      color: var(--olive-dark);
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+    .condition-item strong {
+      font-family: var(--sans);
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--brown);
+      display: block;
+      margin-bottom: .3rem;
+    }
+    .condition-item p {
+      font-family: var(--sans);
+      font-size: .77rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .porcelana-cta {
+      text-align: center;
+      padding: 1rem 0 .5rem;
+    }
+    .porcelana-cta > p {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--brown);
+      margin-bottom: 1.5rem;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── ANNOUNCEMENT BAR ── -->
+  <div class="bar">
+    <a href="https://www.instagram.com/ayra.py/" target="_blank" rel="noopener">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      Seguinos en Instagram · @ayra.py
+    </a>
+  </div>
+
+  <!-- ── NAV ── -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <ul class="nav-left">
+        <li><button type="button" class="nav-shop-btn" id="nav-shop-btn" aria-label="Ver tienda">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Shop
+        </button></li>
+        <li><a href="#porcelana">Porcelana</a></li>
+        <li><a href="#historia">Nuestra Historia</a></li>
+      </ul>
+      <a href="#" class="nav-logo">AYRA</a>
+      <div class="nav-right">
+        <a href="#donde">Donde Encontrarnos</a>
+        <a href="#contacto">Contacto</a>
+        <a href="https://www.instagram.com/ayra.py/" target="_blank" rel="noopener" class="nav-ig" aria-label="Instagram">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <button type="button" class="hamburger" id="ham-btn" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── MOBILE MENU ── -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button type="button" class="mobile-close" id="menu-close">✕</button>
+    <a href="#" id="mobile-shop-btn">Shop</a>
+    <a href="#porcelana">Porcelana</a>
+    <a href="#historia">Nuestra Historia</a>
+    <a href="#donde">Donde Encontrarnos</a>
+    <a href="#contacto">Contacto</a>
+    <a href="https://www.instagram.com/ayra.py/" target="_blank" rel="noopener" style="font-size:1rem;letter-spacing:.2em;text-transform:uppercase;color:var(--olive-dark);">@ayra.py</a>
+  </div>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <img src="img/hero.jpg" alt="AYRA — Artesanía, fragancia y diseño" loading="eager">
+    <div class="hero-overlay">
+      <p class="hero-eyebrow">Artesanía · Fragancia · Diseño</p>
+      <h1 class="hero-title">AYRA</h1>
+      <p class="hero-sub">Hecho con las manos, pensado con el corazón</p>
+      <button type="button" class="btn btn-ghost" id="hero-shop-btn">Ver colección</button>
+    </div>
+  </div>
+
+  <!-- ── SHOP OVERLAY ── -->
+  <div class="shop-overlay" id="shop-overlay" role="dialog" aria-modal="true" aria-label="La Colección">
+    <div class="shop-overlay-bar">
+      <span class="shop-overlay-title">La Colección</span>
+      <button type="button" class="shop-overlay-close" id="shop-close-btn" aria-label="Cerrar tienda">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="shop-overlay-inner">
+      <div id="collection-grid">
+        <div class="filter-wrap">
+          <div class="filters">
+            <button type="button" class="f-btn active" data-filter="all">Todo</button>
+            <button type="button" class="f-btn" data-filter="aromatico">Aromático</button>
+            <button type="button" class="f-btn" data-filter="lampara">Lámparas</button>
+            <button type="button" class="f-btn" data-filter="porcelana">Porcelana</button>
+          </div>
+        </div>
+
+        <div class="product-grid">
+
+          <div class="card" data-cat="aromatico">
+            <div class="card-img"><img src="img/box-flor-xl.jpg" alt="Box Flor XL" loading="lazy"><span class="card-badge">Aromático</span></div>
+            <div class="card-body"><h3 class="card-name">Box Flor XL</h3><p class="card-desc">Pedestal de madera · Flor de yeso XL · Aceite esencial 30 ml · Caja regalo</p><p class="card-price">G. 320.000</p></div>
+          </div>
+
+          <div class="card" data-cat="aromatico">
+            <div class="card-img"><img src="img/box-flor-chica.jpg" alt="Box Flor Chica" loading="lazy"><span class="card-badge">Aromático</span></div>
+            <div class="card-body"><h3 class="card-name">Box Flor Chica</h3><p class="card-desc">Pedestal de madera · Flor de yeso chico · Aceite esencial 10 ml · Caja regalo</p><p class="card-price">G. 200.000</p></div>
+          </div>
+
+          <div class="card" data-cat="aromatico">
+            <div class="card-img"><img src="img/difusor-tulea.jpg" alt="Difusor Tuléa" loading="lazy"><span class="card-badge">Aromático</span></div>
+            <div class="card-body"><h3 class="card-name">Difusor Tuléa</h3><p class="card-desc">Frasco de vidrio · Flor tulipán de yeso · Líquido esencial 150 ml · Caja</p><p class="card-price">G. 389.000</p></div>
+          </div>
+
+          <div class="card" data-cat="aromatico">
+            <div class="card-img"><img src="img/vela-tulea.jpg" alt="Vela Tuléa" loading="lazy"><span class="card-badge">Aromático</span></div>
+            <div class="card-body"><h3 class="card-name">Vela Tuléa</h3><p class="card-desc">Vidrio con tapa · Cera 400 ml · Borla · Fósforos · Caja</p><p class="card-price">G. 389.000</p></div>
+          </div>
+
+          <div class="card" data-cat="aromatico">
+            <div class="card-img"><img src="img/vela-suculenta.jpg" alt="Vela Suculenta" loading="lazy"><span class="card-badge">Aromático</span></div>
+            <div class="card-body"><h3 class="card-name">Vela Suculenta</h3><p class="card-desc">Concreto blanco · Cera natural · Flores decorativas de cera · Múltiples mechas</p><p class="card-price">G. 250.000</p></div>
+          </div>
+
+          <div class="card" data-cat="aromatico">
+            <div class="card-img"><img src="img/souvenirs.jpg" alt="Souvenirs AYRA" loading="lazy"><span class="card-badge">Aromático</span></div>
+            <div class="card-body"><h3 class="card-name">Souvenirs</h3><p class="card-desc">Flor aromática · Vela suculentita · Placa aromática. Perfectos para eventos y regalos corporativos.</p><p class="card-price">Consultar precio</p></div>
+          </div>
+
+          <div class="card" data-cat="lampara">
+            <div class="card-img"><img src="img/lampara-tropical.jpg" alt="Lámpara Tropical" loading="lazy"><span class="card-badge">Lámparas</span></div>
+            <div class="card-body"><h3 class="card-name">Lámpara Tropical</h3><p class="card-desc">Base de cerámica · Pantalla con estampado tropical de flores y hojas. Pieza única.</p><p class="card-price">G. 2.100.000</p></div>
+          </div>
+
+          <div class="card" data-cat="lampara">
+            <div class="card-img"><img src="img/lampara-wavy.jpg" alt="Lámpara Wavy" loading="lazy"><span class="card-badge">Lámparas</span></div>
+            <div class="card-body"><h3 class="card-name">Lámpara Wavy</h3><p class="card-desc">Base de cerámica azul · Pantalla de líneas ondulantes multicolor. Pieza única.</p><p class="card-price">G. 2.100.000</p></div>
+          </div>
+
+          <div class="card" data-cat="lampara">
+            <div class="card-img"><img src="img/lampara-graphic.jpg" alt="Lámpara Graphic" loading="lazy"><span class="card-badge">Lámparas</span></div>
+            <div class="card-body"><h3 class="card-name">Lámpara Graphic</h3><p class="card-desc">Base de cerámica texturizada · Pantalla con diseño gráfico en blanco y negro. Pieza única.</p><p class="card-price">G. 2.100.000</p></div>
+          </div>
+
+          <div class="card" data-cat="porcelana">
+            <div class="card-img"><img src="img/ceramica-yunomi.jpg" alt="Taza Artesanal Gris" loading="lazy"><span class="card-badge">Porcelana</span></div>
+            <div class="card-body"><h3 class="card-name">Taza Artesanal Gris</h3><p class="card-desc">Cerámica rústica de gres gris · Vidriado natural · Hecha a mano. Pieza única.</p><p class="card-price">Consultar precio</p></div>
+          </div>
+
+          <div class="card" data-cat="porcelana">
+            <div class="card-img"><img src="img/ceramica-mug-azul.jpg" alt="Mug Azul Noche" loading="lazy"><span class="card-badge">Porcelana</span></div>
+            <div class="card-body"><h3 class="card-name">Mug Azul Noche</h3><p class="card-desc">Cerámica con vidriado azul profundo · Hecha a mano. Pieza única.</p><p class="card-price">Consultar precio</p></div>
+          </div>
+
+          <div class="card" data-cat="porcelana">
+            <div class="card-img"><img src="img/ceramica-jarra-azul.jpg" alt="Jarra Artesanal" loading="lazy"><span class="card-badge">Porcelana</span></div>
+            <div class="card-body"><h3 class="card-name">Jarra Artesanal</h3><p class="card-desc">Cerámica azul · Forma cafetera con pico vertedor. Pieza única hecha a mano.</p><p class="card-price">Consultar precio</p></div>
+          </div>
+
+          <div class="card" data-cat="porcelana">
+            <div class="card-img"><img src="img/ceramica-copa-azul.jpg" alt="Copa Azul" loading="lazy"><span class="card-badge">Porcelana</span></div>
+            <div class="card-body"><h3 class="card-name">Copa Azul</h3><p class="card-desc">Copa de cerámica con pie · Vidriado azul profundo. Pieza única hecha a mano.</p><p class="card-price">Consultar precio</p></div>
+          </div>
+
+          <div class="card" data-cat="porcelana">
+            <div class="card-img"><img src="img/ceramica-taza-morada.jpg" alt="Taza Lungo" loading="lazy"><span class="card-badge">Porcelana</span></div>
+            <div class="card-body"><h3 class="card-name">Taza Lungo</h3><p class="card-desc">Cerámica con vidriado en tonos morados y azules. Pieza única hecha a mano.</p><p class="card-price">Consultar precio</p></div>
+          </div>
+
+          <div class="card" data-cat="porcelana">
+            <div class="card-img"><img src="img/ceramica-cup-gris.jpg" alt="Taza Cilíndrica Gris" loading="lazy"><span class="card-badge">Porcelana</span></div>
+            <div class="card-body"><h3 class="card-name">Taza Cilíndrica Gris</h3><p class="card-desc">Cerámica gris natural · Diseño minimalista. Pieza única hecha a mano.</p><p class="card-price">Consultar precio</p></div>
+          </div>
+
+          <div class="card" data-cat="porcelana">
+            <div class="card-img"><img src="img/ceramica-pot-azul.jpg" alt="Potiche Azul" loading="lazy"><span class="card-badge">Porcelana</span></div>
+            <div class="card-body"><h3 class="card-name">Potiche Azul</h3><p class="card-desc">Cerámica azul · Boca ancha. Pieza artesanal única hecha a mano.</p><p class="card-price">Consultar precio</p></div>
+          </div>
+
+        </div><!-- /product-grid -->
+
+        <div style="text-align:center;margin-top:2.5rem;">
+          <button type="button" class="btn btn-outline" id="collection-close-btn">Cerrar catálogo</button>
+        </div>
+      </div><!-- /collection-grid -->
+    </div><!-- /shop-overlay-inner -->
+  </div><!-- /shop-overlay -->
+
+  <!-- ── PORCELANA PERSONALIZADA ── -->
+  <section id="porcelana">
+    <div class="inner">
+
+      <div class="porcelana-head">
+        <p class="eyebrow">Hecho a pedido · Pintado a mano</p>
+        <h2 class="section-title">Vajilla Personalizada</h2>
+        <p class="section-lead">Porcelana blanca pintada a mano con tu diseño, iniciales, o detalles en oro y plata. Cada pieza es única — creada especialmente para vos, para regalar, o para completar tu mesa.</p>
+      </div>
+
+      <!-- Photo gallery -->
+      <div class="porcelana-gallery">
+        <div class="porcelana-gallery-img">
+          <img src="img/porcelana-1.jpg" alt="Vajilla personalizada — orquídeas y monograma" loading="lazy">
+        </div>
+        <div class="porcelana-gallery-img">
+          <img src="img/porcelana-2.jpg" alt="Vajilla personalizada — limones con rayas azules" loading="lazy">
+        </div>
+        <div class="porcelana-gallery-img">
+          <img src="img/porcelana-4.jpg" alt="Vajilla personalizada — monograma con rayas negras" loading="lazy">
+        </div>
+      </div>
+
+      <!-- Full Catalog Table -->
+      <div class="catalog-full">
+        <button type="button" class="catalog-toggle" id="catalog-toggle" aria-expanded="false">
+          <span class="catalog-toggle-icon">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#f4efe4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,4 6,8 10,4"/></svg>
+          </span>
+          <span class="catalog-toggle-label">Ver precios por pieza</span>
+        </button>
+        <div class="catalog-table-collapsible" id="catalog-table-collapsible">
+        <div class="catalog-full-head">
+          <h3>Catálogo completo de piezas</h3>
+          <p>Todos los precios incluyen diseño y pintura a mano, por pieza. Consultanos para sets, cantidades o pedidos especiales.</p>
+        </div>
+        <div class="catalog-table-wrap">
+          <table class="price-table price-table--full">
+            <thead>
+              <tr>
+                <th>Pieza</th>
+                <th>Opción 1 — Línea + Iniciales</th>
+                <th>Opción 2 — Dibujo + Línea</th>
+                <th>Opción 3 — Dibujo + Oro/Plata</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="cat-header"><td colspan="4">Vajilla</td></tr>
+              <tr><td>Plato llano 27 cm</td><td>G. 120.000</td><td>G. 150.000</td><td>G. 250.000</td></tr>
+              <tr><td>Plato postre</td><td>G. 82.000</td><td>G. 100.000</td><td>G. 170.000</td></tr>
+              <tr><td>Plato hondo</td><td>G. 110.000</td><td>G. 135.000</td><td>G. 215.000</td></tr>
+              <tr><td>Plato principal tipo borde</td><td>G. 120.000</td><td>G. 150.000</td><td>G. 250.000</td></tr>
+              <tr><td>Plato postre tipo borde</td><td>G. 82.000</td><td>G. 100.000</td><td>G. 170.000</td></tr>
+              <tr><td>Plato llano 31 cm</td><td>G. 230.000</td><td>G. 280.000</td><td>—</td></tr>
+              <tr><td>Plato pasta</td><td>G. 150.000</td><td>G. 230.000</td><td>—</td></tr>
+              <tr><td>Bowl</td><td>G. 105.000</td><td>G. 120.000</td><td>G. 200.000</td></tr>
+
+              <tr class="cat-header"><td colspan="4">Tazas y Servicios</td></tr>
+              <tr><td>Espresso con plato</td><td>G. 82.000</td><td>G. 100.000</td><td>G. 150.000</td></tr>
+              <tr><td>Té con plato</td><td>G. 100.000</td><td>G. 130.000</td><td>G. 170.000</td></tr>
+              <tr><td>Lungo con plato</td><td>G. 100.000</td><td>G. 180.000</td><td>G. 290.000</td></tr>
+              <tr><td>Taza con plato alargado</td><td>G. 200.000</td><td>G. 270.000</td><td>—</td></tr>
+              <tr><td>Azucarero</td><td>G. 200.000</td><td>G. 270.000</td><td>—</td></tr>
+              <tr><td>Tetera</td><td>G. 250.000</td><td>G. 290.000</td><td>—</td></tr>
+              <tr><td>Lecherito</td><td>G. 95.000</td><td>G. 160.000</td><td>—</td></tr>
+              <tr><td>Mielera</td><td>G. 150.000</td><td>G. 210.000</td><td>—</td></tr>
+
+              <tr class="cat-header"><td colspan="4">Accesorios de Mesa</td></tr>
+              <tr><td>Servilletero</td><td>G. 120.000</td><td>G. 170.000</td><td>—</td></tr>
+              <tr><td>Porta cuchara</td><td>G. 200.000</td><td>G. 270.000</td><td>—</td></tr>
+              <tr><td>Mantequero</td><td>G. 180.000</td><td>G. 260.000</td><td>—</td></tr>
+              <tr><td>Aceitero</td><td>G. 410.000</td><td>G. 490.000</td><td>—</td></tr>
+              <tr><td>Set aceitero + pimientero</td><td>G. 450.000</td><td>G. 550.000</td><td>—</td></tr>
+              <tr><td>Cenicero abierto</td><td>G. 190.000</td><td>G. 240.000</td><td>—</td></tr>
+              <tr><td>Quesero</td><td>G. 420.000</td><td>G. 480.000</td><td>—</td></tr>
+
+              <tr class="cat-header"><td colspan="4">Jarras y Fuentes</td></tr>
+              <tr><td>Jarra panza</td><td>G. 360.000</td><td>G. 440.000</td><td>—</td></tr>
+              <tr><td>Jarra</td><td>G. 360.000</td><td>G. 440.000</td><td>—</td></tr>
+              <tr><td>Jarra de noche</td><td>G. 320.000</td><td>G. 390.000</td><td>—</td></tr>
+              <tr><td>Porta comida</td><td>G. 350.000</td><td>G. 490.000</td><td>—</td></tr>
+              <tr><td>Bandeja ovalada / rectangular / alargada</td><td>G. 420.000 – 660.000</td><td>—</td><td>—</td></tr>
+
+              <tr class="cat-header"><td colspan="4">Soperas y Salseras</td></tr>
+              <tr><td>Sopera grande</td><td>G. 820.000</td><td>G. 920.000</td><td>—</td></tr>
+              <tr><td>Sopera con plato</td><td>G. 1.300.000</td><td>G. 1.500.000</td><td>—</td></tr>
+              <tr><td>Salserito</td><td>G. 335.000</td><td>G. 380.000</td><td>—</td></tr>
+
+              <tr class="cat-header"><td colspan="4">Decoración y Regalería</td></tr>
+              <tr><td>Potiche M + G (set)</td><td>Desde G. 380.000</td><td>Desde G. 480.000</td><td>—</td></tr>
+              <tr><td>Potiche bajo</td><td>Desde G. 480.000</td><td>—</td><td>—</td></tr>
+              <tr><td>Alajero redondo pequeño</td><td>Desde G. 250.000</td><td>—</td><td>—</td></tr>
+              <tr><td>Alajero redondo grande</td><td>Desde G. 400.000</td><td>—</td><td>—</td></tr>
+              <tr><td>Alajero ovalado grande</td><td>Desde G. 470.000</td><td>—</td><td>—</td></tr>
+              <tr><td>Virgen María 24 cm</td><td>G. 580.000</td><td>G. 680.000</td><td>—</td></tr>
+              <tr><td>Cruz chica</td><td>G. 80.000</td><td>G. 90.000</td><td>—</td></tr>
+              <tr><td>Cruz grande</td><td>G. 150.000</td><td>G. 170.000</td><td>—</td></tr>
+              <tr><td>Mini porta joyerito</td><td>G. 150.000</td><td>G. 190.000</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        </div><!-- /catalog-table-collapsible -->
+      </div><!-- /catalog-full -->
+
+      <!-- Conditions -->
+      <div class="porcelana-conditions">
+        <div class="condition-item">
+          <span class="cond-icon">◷</span>
+          <div>
+            <strong>Tiempo de entrega</strong>
+            <p>Aproximadamente 1 mes desde la confirmación del pedido</p>
+          </div>
+        </div>
+        <div class="condition-item">
+          <span class="cond-icon">◈</span>
+          <div>
+            <strong>Para confirmar el pedido</strong>
+            <p>50% de anticipo al inicio — el saldo al retirar o al enviar</p>
+          </div>
+        </div>
+        <div class="condition-item">
+          <span class="cond-icon">✦</span>
+          <div>
+            <strong>Piezas con oro o plata</strong>
+            <p>Lavar a mano únicamente — no aptas para microondas ni lavavajillas</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="porcelana-cta">
+        <p>¿Tenés algo en mente? Hablemos.</p>
+        <div class="cta-buttons">
+          <a href="#contacto" class="btn btn-olive">Hacer mi pedido</a>
+          <a href="https://www.instagram.com/ayra.py/" target="_blank" rel="noopener" class="btn btn-outline">Ver ejemplos en Instagram</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── HISTORIA ── -->
+  <section id="historia">
+    <div class="inner">
+      <div class="historia-grid">
+        <div class="historia-imgs">
+          <img class="img-main" src="img/founders.jpg" alt="Gabrielle y Camila — fundadoras de AYRA">
+          <img class="img-secondary" src="img/founders-bw.jpg" alt="Gabrielle y Camila trabajando">
+        </div>
+        <div class="historia-text">
+          <p class="eyebrow">Nuestra historia</p>
+          <blockquote class="historia-quote">
+            "Creemos en lo simple, lo hecho a mano, lo que conecta."
+          </blockquote>
+          <p class="historia-body">
+            Somos Gabrielle y Camila, madre e hija, unidas por la pasión de crear con las manos y el corazón. Desde siempre, la pintura ha sido nuestro lenguaje, y hoy la transformamos en piezas únicas para acompañarte en tu mesa, tu hogar, tus momentos.
+            <br><br>
+            Cada pieza que creamos busca contar una historia y hacer de lo cotidiano, algo especial.
+          </p>
+          <p class="historia-names">— Gabrielle &amp; Camila</p>
+          <a href="https://www.instagram.com/ayra.py/" target="_blank" rel="noopener" class="btn btn-outline">Seguinos en Instagram</a>
+        </div>
+      </div>
+
+      <div class="valores">
+        <div class="valor-item">
+          <div class="valor-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h4>Hecho a mano</h4>
+          <p>Cada pieza pasa por nuestras manos. No hay dos iguales — esa es la esencia de AYRA.</p>
+        </div>
+        <div class="valor-item">
+          <div class="valor-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h4>Lo cotidiano, especial</h4>
+          <p>Diseñamos para los momentos simples — el café de la mañana, la mesa del domingo, el regalo que perdura.</p>
+        </div>
+        <div class="valor-item">
+          <div class="valor-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h4>Arte para el hogar</h4>
+          <p>Fragancia, cerámica y luz que conviven en armonía, transformando cualquier espacio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DONDE ENCONTRARNOS ── -->
+  <section id="donde">
+    <div class="inner">
+      <p class="eyebrow">Puntos de venta</p>
+      <h2 class="section-title">Donde Encontrarnos</h2>
+      <p class="section-lead">Encontrá nuestros productos en tiendas seleccionadas en Asunción y alrededores.</p>
+
+      <div class="stores-grid">
+
+        <div class="store-card">
+          <div class="store-logo-box" style="background:#7a7d1e; padding:0;">
+            <img src="img/ayra-logo.jpg" alt="AYRA Showroom" style="width:100%; height:100%; object-fit:cover; display:block;">
+          </div>
+          <p class="store-name">Showroom<br>con visita programada</p>
+        </div>
+
+        <div class="store-card">
+          <div class="store-logo-box" style="background:#fff; border:1px solid #eee;">
+            <img src="img/store-marketplace.jpg" alt="Marketplace España" style="width:56px; height:56px; object-fit:contain;">
+          </div>
+          <p class="store-name">Marketplace España</p>
+        </div>
+
+        <div class="store-card">
+          <div class="store-logo-box" style="background:#fff; border:1px solid #eee;">
+            <img src="img/store-marketplace.jpg" alt="Marketplace Perseverancia" style="width:56px; height:56px; object-fit:contain;">
+          </div>
+          <p class="store-name">Marketplace<br>Perseverancia</p>
+        </div>
+
+        <div class="store-card">
+          <div class="store-logo-box" style="background:#e8e2db; padding:0;">
+            <img src="img/store-rua-vera.jpg" alt="Rua Vera" style="width:100%; height:100%; object-fit:contain; display:block;">
+          </div>
+          <p class="store-name">Rua Vera</p>
+        </div>
+
+        <div class="store-card">
+          <div class="store-logo-box" style="background:#1c3d2b;">
+            <svg viewBox="0 0 36 22" width="36" height="22">
+              <path d="M14,3 C9,3 4,8 4,13 C4,18 8,21 13,21" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M22,3 C27,3 32,8 32,13 C32,18 28,21 23,21" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            </svg>
+            <span style="font-family:system-ui,sans-serif; font-size:.58rem; color:#fff; letter-spacing:.22em; font-weight:300;">casaomnia</span>
+          </div>
+          <p class="store-name">Casa Omnia</p>
+        </div>
+
+        <div class="store-card">
+          <div class="store-logo-box" style="background:#fff; border:1px solid #eee;">
+            <div style="padding:0 .6rem; text-align:center;">
+              <span style="font-family:system-ui,'Helvetica Neue',Arial,sans-serif; font-size:.62rem; letter-spacing:.38em; color:#111; display:block; padding-bottom:.4rem; border-bottom:1px solid #111;">CELEBRA</span>
+            </div>
+          </div>
+          <p class="store-name">Celebra</p>
+        </div>
+
+        <div class="store-card">
+          <div class="store-logo-box" style="background:#e8d0c6;">
+            <span style="font-family:system-ui,sans-serif; font-size:1.15rem; font-weight:800; color:#8b4a1e; letter-spacing:.04em; line-height:1.1;">LIZA</span>
+            <span style="font-family:system-ui,sans-serif; font-size:.55rem; font-weight:700; color:#8b4a1e; letter-spacing:.3em;">CREA</span>
+          </div>
+          <p class="store-name">Liza Crea</p>
+        </div>
+
+        <div class="store-card">
+          <div class="store-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><line x1="8.46" y1="8.46" x2="15.54" y2="15.54"/><line x1="8.46" y1="15.54" x2="15.54" y2="8.46"/></svg>
+          </div>
+          <p class="store-name">Peluquería Femme</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACTO ── -->
+  <section id="contacto">
+    <div class="inner">
+      <div class="contacto-grid">
+        <div>
+          <p class="eyebrow">Contacto</p>
+          <h2 class="section-title">Hablemos</h2>
+          <p class="contacto-lead">
+            Para pedidos de porcelana personalizada, regalos corporativos, o cualquier consulta — estamos a tu disposición. Cada encargo es especial para nosotras.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:gabrielle@ayra.com.py" class="c-link">
+              <span class="c-icon">✉</span>
+              gabrielle@ayra.com.py
+            </a>
+            <a href="https://linktr.ee/Ayra.py" target="_blank" rel="noopener" class="c-link">
+              <span class="c-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              </span>
+              WhatsApp &amp; redes sociales
+            </a>
+            <a href="https://www.instagram.com/ayra.py/" target="_blank" rel="noopener" class="c-link">
+              <span class="c-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </span>
+              @ayra.py
+            </a>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <div class="field">
+              <label>Nombre</label>
+              <input type="text" name="nombre" placeholder="Tu nombre" required>
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="tu@email.com" required>
+            </div>
+          </div>
+          <div class="field">
+            <label>¿Qué te interesa?</label>
+            <select name="interes">
+              <option value="">Seleccionar…</option>
+              <option>Porcelana personalizada</option>
+              <option>Box Flor / Difusor Tuléa</option>
+              <option>Lámparas</option>
+              <option>Souvenirs / Eventos</option>
+              <option>Consulta general</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Mensaje</label>
+            <textarea name="mensaje" rows="5" placeholder="¿En qué podemos ayudarte?" required></textarea>
+          </div>
+          <p class="form-note">Te respondemos a la brevedad. Para pedidos de porcelana personalizada, el plazo de entrega es de aproximadamente 1 mes.</p>
+          <div>
+            <button type="submit" class="btn btn-gold" id="submit-btn">Enviar mensaje</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-inner">
+      <nav class="footer-links">
+        <a href="#" id="footer-shop-btn">Shop</a>
+        <a href="#historia">Historia</a>
+        <a href="#donde">Tiendas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <span class="footer-logo">AYRA</span>
+      <p class="footer-copy">
+        <a href="mailto:gabrielle@ayra.com.py">gabrielle@ayra.com.py</a><br>
+        <a href="https://www.instagram.com/ayra.py/" target="_blank" rel="noopener">@ayra.py</a><br>
+        © 2024 AYRA · Paraguay
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Nav shadow on scroll
+    var navbar = document.getElementById('navbar');
+    if (navbar) {
+      window.addEventListener('scroll', function() {
+        navbar.classList.toggle('scrolled', window.scrollY > 12);
+      }, { passive: true });
+    }
+
+    // Mobile menu
+    var menu = document.getElementById('mobile-menu');
+    var hamBtn = document.getElementById('ham-btn');
+    var menuClose = document.getElementById('menu-close');
+    if (menu && hamBtn) hamBtn.addEventListener('click', function() { menu.classList.add('open'); });
+    if (menu && menuClose) menuClose.addEventListener('click', function() { menu.classList.remove('open'); });
+    if (menu) {
+      menu.querySelectorAll('a').forEach(function(a) {
+        if (a.id !== 'mobile-shop-btn') {
+          a.addEventListener('click', function() { menu.classList.remove('open'); });
+        }
+      });
+    }
+
+    // Shop overlay
+    var shopOverlay = document.getElementById('shop-overlay');
+    function openShop() {
+      if (!shopOverlay) return;
+      shopOverlay.classList.add('open');
+      shopOverlay.scrollTop = 0;
+      // iOS-compatible scroll lock
+      var scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = '-' + scrollY + 'px';
+      document.body.style.width = '100%';
+    }
+    function closeShop() {
+      if (!shopOverlay) return;
+      var scrollY = Math.abs(parseInt(document.body.style.top || '0'));
+      shopOverlay.classList.remove('open');
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollY);
+    }
+
+    function bindOpen(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('click', function(e) { e.preventDefault(); openShop(); });
+    }
+    function bindClose(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('click', function(e) { e.preventDefault(); closeShop(); });
+    }
+
+    bindOpen('nav-shop-btn');
+    bindOpen('hero-shop-btn');
+    bindOpen('footer-shop-btn');
+    bindClose('shop-close-btn');
+    bindClose('collection-close-btn');
+
+    var mobileShopBtn = document.getElementById('mobile-shop-btn');
+    if (mobileShopBtn) {
+      mobileShopBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (menu) menu.classList.remove('open');
+        openShop();
+      });
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && shopOverlay && shopOverlay.classList.contains('open')) closeShop();
+    });
+
+    // Product filter (inside overlay)
+    var fBtns = document.querySelectorAll('.f-btn');
+    var cards = document.querySelectorAll('.card[data-cat]');
+    fBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        fBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var f = btn.dataset.filter;
+        cards.forEach(function(c) {
+          c.style.display = (f === 'all' || c.dataset.cat === f) ? '' : 'none';
+        });
+      });
+    });
+
+    // Catalog price table toggle
+    var catalogToggle = document.getElementById('catalog-toggle');
+    var catalogCollapsible = document.getElementById('catalog-table-collapsible');
+    if (catalogToggle && catalogCollapsible) {
+      catalogToggle.addEventListener('click', function() {
+        var open = catalogCollapsible.classList.toggle('is-open');
+        catalogToggle.setAttribute('aria-expanded', open);
+        var label = catalogToggle.querySelector('.catalog-toggle-label');
+        if (label) label.textContent = open ? 'Ocultar precios' : 'Ver precios por pieza';
+      });
+    }
+
+    // Contact form
+    var contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = document.getElementById('submit-btn');
+        if (!btn) return;
+        btn.textContent = 'Mensaje enviado ✓';
+        btn.disabled = true;
+        btn.style.background = 'var(--olive-dark)';
+        setTimeout(function() {
+          btn.textContent = 'Enviar mensaje';
+          btn.disabled = false;
+          btn.style.background = '';
+          contactForm.reset();
+        }, 4000);
+      });
+    }
+  </script>
+
+</body>
+</html>
